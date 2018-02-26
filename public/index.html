@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+	<script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+    <!-- Optional theme -->
+	<link href="style/styles.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> 
+</head>
+<body>
+    <table style="font-family: Arial">
+        <tr>
+            <td colspan="2" class="header">
+                <h1>
+                    Кулинарная книга
+                </h1>
+            </td>
+        </tr>
+        <tr>
+			<td class="mainContent">
+				 <div class="container" ng-controller="AppCtrl">
+				   <table class="table">
+					<thead>
+					 <tr>
+					  <th>Рецепт</th>				  
+					  <th>Действие</th>
+					  <th>&nbsp;</th>
+					 </tr>
+					</thead>
+					<tbody>
+					 <tr>
+					  <td><input class="form-control" ng-model="contact.recept"></td>
+					  <td><button class="btn btn-primary" ng-click="addContact()">Добавить</button></td>
+					  <td class="sharWidth"><button class="btn btn-info" ng-click="update()">Оновить</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Очистить</button></td>
+					 </tr>
+					  <thead>
+					   <tr>
+						<th>№</th>
+						<th>
+						 <a href="" ng-click="predicate = 'registr'; reverse=!reverse">Дата регистрации рецепта</a>
+						</th>
+						<th>Рецепт</th>
+					   </tr>
+					  </thead>
+					   <tr  ng-repeat="contact in filteredTodos | orderBy:predicate:reverse">
+						<td>{{ $index + 1 }}</td>
+						<td>{{contact.registr}}</td>
+						<td>{{contact.recept}}</td>
+						<td><button class="btn btn-danger" ng-click="remove(contact._id)">Удалить</button></td>
+						<td><button class="btn btn-warning" ng-click="edit(contact._id)">Редакт</button></td>
+					   </tr>
+					   <!-- начало пагинации -->
+					   <div class="pagination pagination-centered" ng-show="bookday.length">
+                        <ul class="pagination-controle pagination">
+                          <li>
+                           <button type="button" class="btn btn-primary" ng-disabled="currentPage == 1"
+                            ng-click="currentPage=currentPage-1"> &lt; PREV</button>
+                          </li>
+                          <li>
+                           <span>Page {{currentPage}} of {{ page}}</span>
+                          </li>
+                          <li>
+                           <button type="button" class="btn btn-primary"
+                            ng-disabled="currentPage >= len/numPerPage"
+                            ng-click="currentPage = currentPage+1">NEXT &gt;</button>
+                          </li>
+                        </ul>
+                       </div>
+					   <!-- конец пагинации --> 
+					</tbody>
+					</table>
+				 </div>
+			</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="footer">
+                <b>Сделал Иляш Михаил</b>
+            </td>
+        </tr>
+    </table>
+  <script src="controllers/controller.js"></script>
+</body>
+</html>
